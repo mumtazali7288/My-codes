@@ -1,0 +1,34 @@
+model = 
+ NetGraph[{BatchNormalizationLayer[], Tanh, LogisticSigmoid, Tanh, 
+   TotalLayer[], TotalLayer[], TotalLayer[], CatenateLayer[], 
+   LinearLayer[20], BatchNormalizationLayer[], Tanh, LogisticSigmoid, 
+   Tanh, TotalLayer[], TotalLayer[], TotalLayer[], CatenateLayer[], 
+   LinearLayer[20], DropoutLayer[], DropoutLayer[], TotalLayer[], 
+   LogisticSigmoid, BatchNormalizationLayer[], Tanh, LogisticSigmoid, 
+   Tanh, TotalLayer[], TotalLayer[], TotalLayer[], CatenateLayer[], 
+   LinearLayer[20], DropoutLayer[], TotalLayer[], TotalLayer[], 
+   TotalLayer[], TotalLayer[], TotalLayer[], TotalLayer[], 
+   LinearLayer[20], LinearLayer[1]}, {1 -> 2, 1 -> 3, 1 -> 4, 2 -> 5, 
+   3 -> 5, 3 -> 6, 4 -> 6, 2 -> 7, 4 -> 7, 5 -> 8, 6 -> 8, 7 -> 8, 
+   8 -> 9, 10 -> 11, 10 -> 12, 10 -> 13, 11 -> 14, 12 -> 14, 11 -> 15,
+    13 -> 15, 13 -> 16, 12 -> 16, 16 -> 17, 15 -> 17, 14 -> 17, 
+   17 -> 18, 18 -> 19, 9 -> 20, 20 -> 21, 19 -> 21, 21 -> 22, 
+   23 -> 24, 23 -> 25, 23 -> 26, 24 -> 27, 25 -> 27, 24 -> 28, 
+   25 -> 29, 26 -> 28, 26 -> 29, 27 -> 30, 28 -> 30, 29 -> 30, 
+   30 -> 31, 31 -> 32, 32 -> 21, 30 -> 33, 8 -> 33, 8 -> 34, 17 -> 34,
+    30 -> 35, 17 -> 35, 33 -> 36, 34 -> 36, 34 -> 37, 35 -> 37, 
+   37 -> 38, 36 -> 38, 38 -> 39, 39 -> 21, 22 -> 40}, "Input" -> 11]
+
+model = 
+ NetChain[{BatchNormalizationLayer[], LinearLayer[3], Tanh, 
+   LinearLayer[2], LinearLayer[2], BatchNormalizationLayer[], 
+   LinearLayer[1]}, "Input" -> 11]
+
+Net = NetTrain[model2, TrainData, LearningRate -> 0.07, 
+  TargetDevice -> "CPU", WorkingPrecision -> "Real32", BatchSize -> 4]
+
+model = NetChain[{LongShortTermMemoryLayer[2], ConvolutionLayer[7, 1], 
+   LongShortTermMemoryLayer[2], Ramp, LinearLayer[3], LinearLayer[1]},
+   "Input" -> {11, 1}, "Output" -> 1]
+
+Net = NetTrain[net, TrainData1, BatchSize -> 10]
